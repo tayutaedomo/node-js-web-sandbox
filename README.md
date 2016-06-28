@@ -7,8 +7,8 @@ Need Node.js and npm.
 
 Get source code, install modules and start app.
 ```
-$ git clone git@github.com:tayutaedomo/node-paypal-subscription.git
-$ cd node-paypal-subscription
+$ git clone git@github.com:tayutaedomo/videojs-trial.git
+$ cd videojs-trial
 $ npm install
 $ bin/www
 ```
