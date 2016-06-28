@@ -1,0 +1,39 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p>Refer <a href="https://github.com/videojs/video.js#quick-start" target="_blank">https://github.com/videojs/video.js#quick-start</a>.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <video id="really-cool-video" class="video-js vjs-default-skin" controls
+           preload="auto" width="640" height="264" poster="http://vjs.zencdn.net/v/oceans.png">
+      <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+      <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+      <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser
+        that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+  </div>
+</div>
+
+
+<script type="application/javascript">
+  var player = videojs('really-cool-video', { /* Options */ }, function() {
+    console.log('Good to go!');
+
+    this.play(); // if you don't trust autoplay for some reason
+
+    // How about an event listener?
+    this.on('ended', function() {
+      console.log('awww...over so soon?');
+    });
+  });
+</script>
+
