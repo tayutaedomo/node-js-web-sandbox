@@ -26,6 +26,10 @@ router.get('/guide_setup_dynamically', function(req, res, next) {
   res.render('guide_setup_dynamically', { title: 'Guide: Setup with dynamically loaded' });
 });
 
+router.get('/contrib_hls', function(req, res, next) {
+  res.render('contrib_hls', { title: 'videojs-contrib-hls' });
+});
+
 
 module.exports = router;
 
