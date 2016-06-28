@@ -15,6 +15,10 @@ $ bin/www
 Your app should now be running on http://localhost:3000.
 
 
+# Trials
+![index](https://raw.githubusercontent.com/tayutaedomo/videojs-trial/images/public/images/2016-06-28_index.png)
+
+
 # License
 MIT
 
