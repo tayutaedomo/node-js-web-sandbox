@@ -16,7 +16,7 @@ Your app should now be running on http://localhost:3000.
 
 
 # Trials
-[https://tayutaedomo-videojs-trial.herokuapp.com](https://tayutaedomo-videojs-trial.herokuapp.com)
+[http://tayutaedomo-videojs-trial.herokuapp.com](http://tayutaedomo-videojs-trial.herokuapp.com)
 
 ![index](https://raw.githubusercontent.com/tayutaedomo/videojs-trial/images/public/images/2016-06-28_index.png)
 
