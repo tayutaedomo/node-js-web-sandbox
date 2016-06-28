@@ -1,0 +1,10 @@
+{
+  "name": "videojs-trial",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "video-js": "5.9.2"
+  }
+}
+
