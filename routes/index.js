@@ -34,6 +34,10 @@ router.get('/design_resizing', function(req, res, next) {
   res.render('design_resizing', { title: 'Design: Resizing' });
 });
 
+router.get('/events', function(req, res, next) {
+  res.render('events', { title: 'Events' });
+});
+
 
 module.exports = router;
 
