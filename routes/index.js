@@ -30,6 +30,10 @@ router.get('/contrib_hls', function(req, res, next) {
   res.render('contrib_hls', { title: 'videojs-contrib-hls' });
 });
 
+router.get('/design_resizing', function(req, res, next) {
+  res.render('design_resizing', { title: 'Design: Resizing' });
+});
+
 
 module.exports = router;
 
