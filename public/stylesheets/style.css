@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.video-width-fitting {
+  width: 100% !important;
+}
+
