@@ -3,6 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('req.headers["x-forwarded-for"]', req.headers['x-forwarded-for']);
+  console.log('req.headers["x-appengine-user-ip"]', req.headers['x-appengine-user-ip']);
   console.log('req.ip', req.ip);
   console.log('req.ips', req.ips);
 
