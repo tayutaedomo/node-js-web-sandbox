@@ -44,6 +44,10 @@ router.get('/videojs/events', function(req, res, next) {
   res.render('videojs/events', { title: 'Events' });
 });
 
+router.get('/agilecrm/api', function(req, res, next) {
+  res.render('agilecrm/api', { title: 'Agile CRM API' });
+});
+
 
 module.exports = router;
 

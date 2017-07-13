@@ -1,0 +1,77 @@
+
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p id="message" class="bg-info" style="display: none;">
+    </p>
+
+    <label>Email</label>: <input id="email" type="text" name="email"><br>
+    <button class="btn btn-success btn-sm" onclick="doSetEmail()">Do _agile.set_email</button>
+    <button class="btn btn-success btn-sm" onclick="doSetEmailAndPageView()">Do _agile.set_email and _agile.track_page_view</button>
+    <button class="btn btn-success btn-sm" onclick="doGetEmail()">Do _agile.get_email</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function clearMessage() {
+    $('#message').text('').hide();
+  }
+
+  function showMessage(message) {
+    $('#message').text(message).show();
+  }
+
+  function getEmail() {
+    return $('#email').val();
+  }
+
+  function doSetEmail() {
+    clearMessage();
+
+    if (window._agile) {
+      window._agile.set_email(getEmail());
+      showMessage('set_email completed.');
+
+    } else {
+      console.log('doSetEmail _agile is empty.');
+    }
+  }
+
+  function doSetEmailAndPageView() {
+    clearMessage();
+
+    if (window._agile) {
+      window._agile.set_email(getEmail());
+      window._agile.track_page_view();
+      showMessage('set_email and track_page_view completed.');
+
+    } else {
+      console.log('doSetEmailWithPageView _agile is empty.');
+    }
+  }
+
+  function doGetEmail() {
+    clearMessage();
+
+    if (! window._agile) {
+      console.log('doGetEmail _agile is empty.');
+      return;
+    }
+
+    window._agile.get_email({
+      success: function(data){
+        console.log(data);
+
+        showMessage(data.email);
+      },
+      error: function(data){
+        console.error(data);
+        showMessage(data.error);
+      }
+    });
+  }
+</script>
+
