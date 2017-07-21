@@ -32,6 +32,10 @@ router.get('/agilecrm/api', function(req, res, next) {
   res.render('agilecrm/api', { title: 'Agile CRM API' });
 });
 
+router.get('/dom/style', function(req, res, next) {
+  res.render('dom/style', { title: 'DOM style' });
+});
+
 
 module.exports = router;
 
