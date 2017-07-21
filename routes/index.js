@@ -12,36 +12,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Video.js Trial' });
 });
 
-router.get('/videojs/quick_start', function(req, res, next) {
-  res.render('videojs/quick_start', { title: 'Quick Start' });
-});
 
-router.get('/videojs/quick_start_without_auto', function(req, res, next) {
-  res.render('videojs/quick_start_without_auto', { title: 'Quick Start without auto setup' });
-});
-
-router.get('/videojs/guide_setup', function(req, res, next) {
-  res.render('videojs/guide_setup', { title: 'Guide: Setup' });
-});
-
-router.get('/videojs/guide_setup_centered', function(req, res, next) {
-  res.render('videojs/guide_setup_centered', { title: 'Guide: Setup with play button centered' });
-});
-
-router.get('/videojs/guide_setup_dynamically', function(req, res, next) {
-  res.render('videojs/guide_setup_dynamically', { title: 'Guide: Setup with dynamically loaded' });
-});
-
-router.get('/videojs/contrib_hls', function(req, res, next) {
-  res.render('videojs/contrib_hls', { title: 'videojs-contrib-hls' });
-});
-
-router.get('/videojs/design_resizing', function(req, res, next) {
-  res.render('videojs/design_resizing', { title: 'Design: Resizing' });
-});
-
-router.get('/videojs/events', function(req, res, next) {
-  res.render('videojs/events', { title: 'Events' });
+var VIDEOJS_TITLES = {
+  quick_start: 'Quick Start',
+  quick_start_without_auto: 'Quick Start without auto setup',
+  guide_setup:  'Guide: Setup',
+  guide_setup_centered: 'Guide: Setup with play button centered',
+  guide_setup_dynamically: 'Guide: Setup with dynamically loaded',
+  contrib_hls: 'videojs-contrib-hls',
+  design_resizing: 'Design: Resizing',
+  events: 'Events'
+};
+router.get('/videojs/:view', function(req, res) {
+  var title = VIDEOJS_TITLES[req.params.view] ? VIDEOJS_TITLES[req.params.view] : req.params.view;
+  res.render('videojs/' + req.params.view, { title : title });
 });
 
 router.get('/agilecrm/api', function(req, res, next) {
