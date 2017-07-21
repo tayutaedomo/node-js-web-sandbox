@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "6.x"
+  },
   "scripts": {
     "postinstall": "bower install",
     "start": "node ./bin/www"
