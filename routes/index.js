@@ -32,8 +32,12 @@ router.get('/agilecrm/api', function(req, res, next) {
   res.render('agilecrm/api', { title: 'Agile CRM API' });
 });
 
-router.get('/dom/style', function(req, res, next) {
-  res.render('dom/style', { title: 'DOM style' });
+router.get('/dom/:view', function(req, res, next) {
+  res.render('dom/' + req.params.view, { title: req.params.view + ' | DOM' });
+});
+
+router.get('/css/:view', function(req, res, next) {
+  res.render('css/' + req.params.view, { title: req.params.view + ' | CSS' });
 });
 
 
