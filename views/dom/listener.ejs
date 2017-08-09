@@ -1,0 +1,54 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <p>
+    See: <a href="http://webkatu.com/remove-eventlistener/" target="_blank">http://webkatu.com/remove-eventlistener/</a>
+  </p>
+
+  <button id="button">Button</button>
+</div>
+
+<script type="text/javascript">
+  // #1 Not working
+  var button = document.getElementById('button');
+
+  var listener_1 = function(e) {
+    console.log('#1');
+
+    button.removeEventListener('click', listener_1);
+  }
+
+  button.addEventListener('click', listener_1, true);
+
+
+  // #2 Working
+  button.addEventListener(
+    'click',
+    (function() {
+      return function listener_2(e) {
+        console.log('#2', e);
+        button.removeEventListener('click', listener_2, false);
+      }
+    })(),
+    false);
+
+
+  // #3 Working
+  var listener_3;
+
+  button.addEventListener(
+    'click',
+    (function() {
+      listener_3 = function(e) {
+        console.log('#3', e);
+        button.removeEventListener('click', listener_3, false);
+      }
+
+      return listener_3;
+    })(),
+    false);
+
+</script>
+
