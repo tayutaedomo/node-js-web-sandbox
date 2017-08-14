@@ -24,6 +24,7 @@
     "videojs-contrib-hls": "2.0.1"
   },
   "devDependencies": {
-    "preloader-rg": "^1.0.0"
+    "preloader-rg": "^1.0.0",
+    "pxloader": "^1.1.2"
   }
 }
