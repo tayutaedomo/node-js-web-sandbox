@@ -40,6 +40,10 @@ router.get('/css/:view', function(req, res, next) {
   res.render('css/' + req.params.view, { title: req.params.view + ' | CSS' });
 });
 
+router.get('/js/:view', function(req, res, next) {
+  res.render('js/' + req.params.view, { title: req.params.view + ' | Javascript' });
+});
+
 
 module.exports = router;
 
