@@ -44,6 +44,10 @@ router.get('/js/:view', function(req, res, next) {
   res.render('js/' + req.params.view, { title: req.params.view + ' | Javascript' });
 });
 
+router.get('/webrtc/:view', function(req, res, next) {
+  res.render('webrtc/' + req.params.view, { title: req.params.view + ' | Javascript' });
+});
+
 
 module.exports = router;
 
