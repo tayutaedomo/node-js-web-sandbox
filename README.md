@@ -1,5 +1,5 @@
-# videojs-trial
-Try video.js.
+# node-js-web-sandbox
+Try Web etc.
 
 
 # Setup on your local
@@ -13,12 +13,6 @@ $ npm install
 $ bin/www
 ```
 Your app should now be running on http://localhost:3000.
-
-
-# Trials
-[http://tayutaedomo-videojs-trial.herokuapp.com](http://tayutaedomo-videojs-trial.herokuapp.com)
-
-![index](https://raw.githubusercontent.com/tayutaedomo/videojs-trial/images/public/images/2016-06-28_index.png)
 
 
 # License
