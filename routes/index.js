@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   console.log('req.ip', req.ip);
   console.log('req.ips', req.ips);
 
-  res.render('index', { title: 'Video.js Trial' });
+  res.render('index', { title: 'Web Sandbox' });
 });
 
 
@@ -45,7 +45,7 @@ router.get('/js/:view', function(req, res, next) {
 });
 
 router.get('/webrtc/:view', function(req, res, next) {
-  res.render('webrtc/' + req.params.view, { title: req.params.view + ' | Javascript' });
+  res.render('webrtc/' + req.params.view, { title: req.params.view + ' | Media API' });
 });
 
 
