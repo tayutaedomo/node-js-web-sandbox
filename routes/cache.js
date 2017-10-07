@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 //var beautify = require('js-beautify').js_beautify;
-var redis = require("redis");
-
 var redis_url = process.env.REDIS_URL;
 
 
@@ -19,6 +17,7 @@ router.post('/redis/get', function(req, res) {
   var key = req.body.key;
   var params = { key: key };
 
+  var redis = require('redis');
   var client = redis.createClient(redis_url);
 
   // TODO: How to integrate connect error handling
@@ -47,6 +46,43 @@ router.post('/redis/get', function(req, res) {
     }
 
     res.render('cache/redis/get', payload);
+  });
+});
+
+router.get('/ioredis/get', function(req, res) {
+  res.render('cache/ioredis/get', {
+    title : 'ioredis Get',
+    data: { params: {} }
+  });
+});
+
+router.post('/ioredis/get', function(req, res) {
+  var key = req.body.key;
+  var params = { key: key };
+
+  var Redis = require('ioredis');
+  var redis = new Redis(redis_url);
+
+  var payload =  {
+    title : 'Redis Get',
+    data: {
+      params: params
+    }
+  };
+
+  redis.get('foo', function (err, result) {
+    if (err) {
+      payload.data.error = JSON.stringify(err, null, 2);
+
+    } else {
+      if (result == null) {
+        payload.data.result = 'Value is null.';
+      } else {
+        payload.data.result = result;
+      }
+    }
+
+    res.render('cache/ioredis/get', payload);
   });
 });
 
