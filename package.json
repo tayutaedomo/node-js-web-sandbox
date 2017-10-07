@@ -20,6 +20,7 @@
     "ejs-mate": "^2.3.0",
     "express": "~4.13.4",
     "ioredis": "^3.1.4",
+    "memjs": "^1.0.0-rc.1",
     "morgan": "~1.7.0",
     "node-memcached-client": "^0.7.1",
     "redis": "^2.8.0",
