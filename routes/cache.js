@@ -10,7 +10,10 @@ var redis_url = process.env.REDIS_URL;
 // });
 
 router.get('/redis/get', function(req, res) {
-  res.render('cache/redis/get', { title : 'Redis Get', data: { params: {} } });
+  res.render('cache/redis/get', {
+    title : 'Redis Get',
+    data: { params: {} }
+  });
 });
 
 router.post('/redis/get', function(req, res) {
@@ -116,6 +119,48 @@ router.post('/ioredis/set', function(req, res) {
     }
 
     res.render('cache/ioredis/get', payload);
+  });
+});
+
+router.get('/node-memcached-client/get', function(req, res) {
+  res.render('cache/node-memcached-client/get', {
+    title : 'node-memcached-client Get',
+    data: { params: {} }
+  });
+});
+
+router.post('/node-memcached-client/get', function(req, res) {
+  var key = req.body.key;
+  var params = { key: key };
+
+  var Memcached = require('node-memcached-client');
+  var client = new Memcached({
+    host: 'localhost',
+    port: 11211
+  });
+
+  var payload =  {
+    title : 'node-memcached-client Get',
+    data: {
+      params: params
+    }
+  };
+
+  client.connect().then(function(c) {
+    return c.get(key);
+
+  }).then(function(value) {
+    if (value == null) {
+      payload.data.result = 'Value is null.';
+    } else {
+      payload.data.result = value;
+    }
+
+    res.render('cache/node-memcached-client/get', payload);
+
+  }).catch(function(err) {
+    payload.data.error = JSON.stringify(err, null, 2);
+    res.render('cache/node-memcached-client/get', payload);
   });
 });
 
