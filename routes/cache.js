@@ -70,7 +70,7 @@ router.post('/ioredis/get', function(req, res) {
     }
   };
 
-  redis.get('foo', function (err, result) {
+  redis.get(key, function (err, result) {
     if (err) {
       payload.data.error = JSON.stringify(err, null, 2);
 
@@ -80,6 +80,39 @@ router.post('/ioredis/get', function(req, res) {
       } else {
         payload.data.result = result;
       }
+    }
+
+    res.render('cache/ioredis/get', payload);
+  });
+});
+
+router.get('/ioredis/set', function(req, res) {
+  res.render('cache/ioredis/set', {
+    title : 'ioredis Set',
+    data: { params: {} }
+  });
+});
+
+router.post('/ioredis/set', function(req, res) {
+  var key = req.body.key;
+  var value = req.body.value;
+  var params = { key: key };
+
+  var Redis = require('ioredis');
+  var redis = new Redis(redis_url);
+
+  var payload =  {
+    title : 'Redis Set',
+    data: {
+      params: params
+    }
+  };
+
+  redis.set(key, value, function(err, result) {
+    if (err) {
+      payload.data.error = JSON.stringify(err, null, 2);
+    } else {
+      payload.data.result = result;
     }
 
     res.render('cache/ioredis/get', payload);
