@@ -213,8 +213,6 @@ router.post('/memjs/set', function(req, res) {
   var value = req.body.value;
   var params = { key: key };
 
-  // var Redis = require('ioredis');
-  // var redis = new Redis(redis_url);
   var memjs = require('memjs');
   var client = memjs.Client.create();
 
@@ -225,7 +223,7 @@ router.post('/memjs/set', function(req, res) {
     }
   };
 
-  client.set(key, value, { expires:600 }, function(err, result) {
+  client.set(key, value, { expires: 600 }, function(err, result) {
     if (err) {
       payload.data.error = JSON.stringify(err, null, 2);
     } else {
