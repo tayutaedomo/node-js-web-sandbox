@@ -164,6 +164,43 @@ router.post('/node-memcached-client/get', function(req, res) {
   });
 });
 
+router.get('/memjs/get', function(req, res) {
+  res.render('cache/memjs/get', {
+    title : 'memjs Get',
+    data: { params: {} }
+  });
+});
+
+router.post('/memjs/get', function(req, res) {
+  var key = req.body.key;
+  var params = { key: key };
+
+  var memjs = require('memjs');
+  var client = memjs.Client.create();
+
+  var payload =  {
+    title : 'memjs Get',
+    data: {
+      params: params
+    }
+  };
+
+  client.get('hello', function(err, value) {
+    if (err) {
+      payload.data.error = JSON.stringify(err, null, 2);
+
+    } else {
+      if (value == null) {
+        payload.data.result = 'Value is null.';
+      } else {
+        payload.data.result = value;
+      }
+    }
+
+    res.render('cache/memjs/get', payload);
+  });
+});
+
 
 module.exports = router;
 
