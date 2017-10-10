@@ -185,7 +185,7 @@ router.post('/memjs/get', function(req, res) {
     }
   };
 
-  client.get('hello', function(err, value) {
+  client.get(key, function(err, value) {
     if (err) {
       payload.data.error = JSON.stringify(err, null, 2);
 
@@ -198,6 +198,41 @@ router.post('/memjs/get', function(req, res) {
     }
 
     res.render('cache/memjs/get', payload);
+  });
+});
+
+router.get('/memjs/set', function(req, res) {
+  res.render('cache/memjs/set', {
+    title : 'memjs Set',
+    data: { params: {} }
+  });
+});
+
+router.post('/memjs/set', function(req, res) {
+  var key = req.body.key;
+  var value = req.body.value;
+  var params = { key: key };
+
+  // var Redis = require('ioredis');
+  // var redis = new Redis(redis_url);
+  var memjs = require('memjs');
+  var client = memjs.Client.create();
+
+  var payload =  {
+    title : 'memjs Set',
+    data: {
+      params: params
+    }
+  };
+
+  client.set(key, value, { expires:600 }, function(err, result) {
+    if (err) {
+      payload.data.error = JSON.stringify(err, null, 2);
+    } else {
+      payload.data.result = result;
+    }
+
+    res.render('cache/memjs/set', payload);
   });
 });
 
