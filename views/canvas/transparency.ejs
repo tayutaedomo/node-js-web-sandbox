@@ -1,0 +1,70 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas_2"></canvas>
+    <canvas id="canvas_3"></canvas>
+  </div>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    var canvas = document.querySelector('#canvas');
+    canvas.width = 200;
+    canvas.height = 200;
+
+    var context = canvas.getContext('2d');
+
+    context.fillStyle = 'rgba(0, 0, 255, 0.5)';
+    context.fillRect(0, 0, 100, 100);
+    context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    context.fillRect(100, 0, 100, 100);
+    context.fillStyle = 'rgba(0, 255, 0, 0.5)';
+    context.fillRect(0, 100, 100, 100);
+    context.fillStyle = 'rgba(255, 255, 0, 0.5)';
+    context.fillRect(100, 100, 100, 100);
+  })();
+
+  (function() {
+    var canvas = document.querySelector('#canvas_2');
+    canvas.width = 200;
+    canvas.height = 200;
+
+    var context = canvas.getContext('2d');
+    context.globalAlpha = 0.5;
+
+    context.fillStyle = 'blue';
+    context.fillRect(0, 0, 100, 100);
+    context.fillStyle = 'red';
+    context.fillRect(100, 0, 100, 100);
+    context.fillStyle = 'green';
+    context.fillRect(0, 100, 100, 100);
+    context.fillStyle = 'yellow';
+    context.fillRect(100, 100, 100, 100);
+  })();
+
+  (function() {
+    var canvas = document.querySelector('#canvas_3');
+    canvas.width = 200;
+    canvas.height = 200;
+
+    var context = canvas.getContext('2d');
+
+    context.globalAlpha = 0.5;
+    context.fillStyle = 'blue';
+    context.fillRect(0, 0, 100, 100);
+    context.globalAlpha = 1.0;
+    context.fillStyle = 'red';
+    context.fillRect(100, 0, 100, 100);
+    context.globalAlpha = 0.7;
+    context.fillStyle = 'green';
+    context.fillRect(0, 100, 100, 100);
+    context.globalAlpha = 0.3;
+    context.fillStyle = 'yellow';
+    context.fillRect(100, 100, 100, 100);
+  })();
+</script>
+
