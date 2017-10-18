@@ -48,6 +48,10 @@ router.get('/webrtc/:view', function(req, res, next) {
   res.render('webrtc/' + req.params.view, { title: req.params.view + ' | Media API' });
 });
 
+router.get('/canvas/:view', function(req, res, next) {
+  res.render('canvas/' + req.params.view, { title: req.params.view + ' | Canvas' });
+});
+
 
 module.exports = router;
 
