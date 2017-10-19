@@ -3,21 +3,24 @@
 <h1><%= title %></h1>
 
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-4">
     <h4>Default</h4>
     <canvas id="canvas"></canvas>
   </div>
-  <div class="col-sm-12">
+  <div class="col-sm-4">
     <h4>Set style width/height</h4>
     <canvas id="canvas_2"></canvas>
   </div>
-  <div class="col-sm-12">
+  <div class="col-sm-4">
     <h4>Set canvas width/height</h4>
     <canvas id="canvas_3"></canvas>
   </div>
+</div>
+<div class="row">
   <div class="col-sm-12">
     <h4>Set style width/height and canvas width/height to stretch</h4>
     <canvas id="canvas_4"></canvas>
+    <canvas id="canvas_5"></canvas>
   </div>
 </div>
 
@@ -74,6 +77,26 @@
     canvas.width = 10;
     canvas.height = 10;
     var context = canvas.getContext('2d');
+    context.fillStyle = "blue";
+    context.fillRect(0, 0, 5, 5);
+    context.fillStyle = "red";
+    context.fillRect(5, 0, 5, 5);
+    context.fillStyle = "green";
+    context.fillRect(0, 5, 5, 5);
+    context.fillStyle = "yellow";
+    context.fillRect(5, 5, 5, 5);
+  })();
+
+  (function() {
+    var canvas = document.querySelector('#canvas_5');
+    canvas.style.width = '200px';
+    canvas.style.height = '200px';
+    canvas.width = 10;
+    canvas.height = 10;
+
+    var context = canvas.getContext('2d');
+    //context.scale(1, 1);
+    //context.globalCompositeOperation = 'lighter';
     context.fillStyle = "blue";
     context.fillRect(0, 0, 5, 5);
     context.fillStyle = "red";
