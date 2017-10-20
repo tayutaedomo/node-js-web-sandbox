@@ -1,0 +1,45 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h4>Just Fit</h4>
+    <canvas id="canvas"></canvas>
+  </div>
+  <div class="col-sm-4">
+    <h4>Diameter Over Canvas</h4>
+    <canvas id="canvas_2"></canvas>
+  </div>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    var canvas = document.querySelector('#canvas');
+    canvas.width = 200;
+    canvas.height = 200;
+
+    var context = canvas.getContext('2d');
+    context.fillStyle = "black";
+    context.strokeRect(0, 0, 200, 200);
+
+    context.fillStyle = "blue";
+    context.arc(100, 100, 100, 0, Math.PI * 2, false);
+    context.fill();
+  })();
+
+  (function() {
+    var canvas = document.querySelector('#canvas_2');
+    canvas.width = 200;
+    canvas.height = 200;
+
+    var context = canvas.getContext('2d');
+    context.fillStyle = "black";
+    context.strokeRect(0, 0, 200, 200);
+
+    context.fillStyle = "blue";
+    context.arc(100, 100, 110, 0, Math.PI * 2, false);
+    context.fill();
+  })();
+</script>
+
