@@ -1,0 +1,31 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h4>Default</h4>
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    var canvas = document.querySelector('#canvas');
+    var context = canvas.getContext('2d');
+    canvas.width = 200;
+    canvas.height = 200;
+    context.fillStyle = "blue";
+    context.fillRect(0, 0, 100, 100);
+    context.fillStyle = "red";
+    context.translate(100, 0);
+    context.fillRect(0, 0, 100, 100);
+    context.fillStyle = "green";
+    context.translate(-100, 100);
+    context.fillRect(0, 0, 100, 100);
+    context.fillStyle = "yellow";
+    context.translate(100, 0);
+    context.fillRect(0, 0, 100, 100);
+  })();
+</script>
+
