@@ -60,6 +60,41 @@ router.post('/checkout', function(req, res) {
   });
 });
 
+router.get('/charge', function(req, res) {
+  res.render('stripe/charge', {
+    title : 'Stripe Charge',
+    data: { params: {} }
+  });
+});
+
+router.post('/charge', function(req, res) {
+  var payload = {
+    title : 'Stripe Charge',
+    data: { params: {} }
+  };
+
+  stripe.charges.create({
+    amount: 1000,
+    currency: "usd",
+    // amount: 1000,
+    // currency: "jpy",
+    customer: req.body.customer_id
+
+  }).then(function(charge) {
+    debug(charge);
+    payload.data.result = JSON.stringify(charge, null, 2);
+
+    res.render('stripe/charge', payload);
+
+  }).catch(function(err) {
+    console.error(err.stack);
+
+    payload.data.error = err;
+
+    res.render('stripe/charge', payload);
+  });
+});
+
 
 module.exports = router;
 
