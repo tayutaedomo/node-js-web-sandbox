@@ -1,0 +1,31 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form action="/stripe/subscription" method="POST">
+      <div class="form-group">
+        <label>Customer ID:</label>
+        <input type="text" name="customer_id" value="<%if (data.params.customer_id) { %><%= data.params.customer_id %><% } %>">
+      </div>
+
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-12">
+    <% if (data.error) { %>
+    <label>API call Failed</label>
+    <pre class="bg-danger"><code><%= data.error %></code></pre>
+    <% } %>
+
+    <% if (data.result) { %>
+    <label>API call succeeded</label>
+    <pre class="bg-success"><code><%= data.result %></code></pre>
+    <% } %>
+  </div>
+</div>
+

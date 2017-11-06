@@ -149,6 +149,42 @@ router.post('/charge', function(req, res) {
   });
 });
 
+router.get('/subscription', function(req, res) {
+  res.render('stripe/subscription', {
+    title : 'Stripe Subscription',
+    data: { params: {} }
+  });
+});
+
+router.post('/subscription', function(req, res) {
+  var payload = {
+    title : 'Stripe Subscription',
+    data: { params: {} }
+  };
+
+  stripe.subscriptions.create({
+    customer: req.body.customer_id,
+    items: [
+      {
+        plan: 'usd_monthly'
+      }
+    ]
+
+  }).then(function(subscription) {
+    debug(subscription);
+    payload.data.result = JSON.stringify(subscription, null, 2);
+
+    res.render('stripe/charge', payload);
+
+  }).catch(function(err) {
+    console.error(err.stack);
+
+    payload.data.error = err;
+
+    res.render('stripe/subscription', payload);
+  });
+});
+
 
 module.exports = router;
 
