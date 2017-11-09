@@ -1,0 +1,25 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-4">
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    var canvas = document.querySelector('#canvas');
+    var context = canvas.getContext('2d');
+    context.fillStyle = 'blue';
+    context.fillRect(0, 0, 100, 100);
+
+    context.fillStyle = 'black';
+    context.textAlign = 'left';
+    context.textBaseline = 'top';
+    context.font = '24px serif';
+    context.fillText("123", 0, 0);
+  })();
+</script>
+
