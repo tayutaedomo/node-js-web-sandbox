@@ -1,0 +1,47 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h4>Trimmed</h4>
+    <canvas style="width: 200px; height: 200px;" id="canvas"></canvas>
+  </div>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    // See: https://qiita.com/ukyo/items/d623209655a003b13add
+    function download(blob, filename) {
+      var objectURL = (window.URL || window.webkitURL).createObjectURL(blob);
+      var a = document.createElement('a');
+      var e = document.createEvent('MouseEvent');
+
+      a.download = filename;
+      a.href = objectURL;
+
+      e.initEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+      a.dispatchEvent(e);
+    }
+
+    var img = new Image();
+    img.src = '/images/shutterstock_522257740_small.jpg';
+
+    img.onload = function() {
+      var canvas = document.querySelector('#canvas');
+      canvas.width = img.width;
+      canvas.height = img.height / 2;
+
+      var context = canvas.getContext('2d');
+      context.drawImage(img,
+        0, 0, img.width, img.height / 2,
+        0, 0, canvas.width, canvas.height);
+
+      // See: https://developer.mozilla.org/ja/docs/Web/API/HTMLCanvasElement/toBlob
+      canvas.toBlob(function(blob) {
+        download(blob, 'download.png');
+      });
+    };
+  })();
+</script>
+
