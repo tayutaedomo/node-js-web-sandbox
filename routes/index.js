@@ -52,6 +52,10 @@ router.get('/canvas/:view', function(req, res, next) {
   res.render('canvas/' + req.params.view, { title: req.params.view + ' | Canvas' });
 });
 
+router.get('/timeline/:view', function(req, res, next) {
+  res.render('timeline/' + req.params.view, { title: req.params.view + ' | Timeline' });
+});
+
 
 module.exports = router;
 
