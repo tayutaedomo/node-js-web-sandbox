@@ -1,0 +1,48 @@
+<% layout('layout') %>
+
+<% block('additional_link_tags').append('<link rel="stylesheet" type="text/css" href="/components/vis/vis.css">') %>
+<% block('additional_javascript_tags').append('<script type="text/javascript" src="/components/vis/vis.js"></script>') %>
+
+<h1><%= title %></h1>
+
+<p>Refer: http://visjs.org/docs/timeline/#Example</p>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div id="visualization"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var container = document.getElementById('visualization');
+
+  var items = new vis.DataSet([
+    {id: 1, content: 'item 1', start: 0},
+    {id: 2, content: '<img style="width:16px;" src="/components/vis/img/network/plus.png" />', start: 2000},
+    {id: 3, content: 'item 3', start: 4000},
+    {id: 4, content: 'item 4', start: 5000},
+    {id: 5, content: 'item 5', start: 10000},
+    {id: 6, content: 'item 6', start: 11000, type: 'box', align: 'right'}
+  ]);
+
+  var options = {
+    min: 0,
+    max: 12000,
+    align: 'left',
+    showMajorLabels: false,
+    format: {
+      minorLabels: function(date, scale, step) {
+        //console.log('minorLabels', date, scale, step)
+        return date - new Date(0);
+      }
+//      majorLabels: function(date, scale, step) {
+//        console.log('majorLabels', date, scale, step)
+//        return date - new Date(0);
+//      }
+    }
+  };
+
+  // Create a Timeline
+  var timeline = new vis.Timeline(container, items, options);
+</script>
+
