@@ -16,31 +16,60 @@
 <script type="text/javascript">
   var container = document.getElementById('visualization');
 
-  var items = new vis.DataSet([
+  var item_raw_list = [
     {id: 1, start: 0, content: 'item 1'},
     {id: 2, start: 2000, content: '<img style="width:16px;" src="/components/vis/img/network/plus.png" />', title: 'Plus'},
     {id: 3, start: 4000, content: 'item 3'},
     {id: 4, start: 5000, content: 'item 4'},
     {id: 5, start: 10000, content: 'item 5'},
-    {id: 6, start: 11000, content: 'item 6', align: 'center'} // align is not working.
-  ]);
+    {id: 6, start: 11000, content: 'item 6'}
+  ];
+
+  var items = new vis.DataSet(item_raw_list);
 
   var options = {
+    showCurrentTime: true,
+    align: 'left',
+    //start: 0,
+    //end: 12000,
     min: 0,
     max: 12000,
-    align: 'left',
+    showMajorLabels: false,
+    orientation: 'top',
     format: {
       minorLabels: function(date, scale, step) {
-        console.log('minorLabels', date, scale, step)
-        return date - new Date(0);
-      },
-      majorLabels: function(date, scale, step) {
-        console.log('majorLabels', date, scale, step)
         return date - new Date(0);
       }
     }
   };
 
   var timeline = new vis.Timeline(container, items, options);
+
+  timeline.setCurrentTime(1);
+
+  var custom_time_id = 't1';
+  var end_time = item_raw_list[item_raw_list.length - 1].start;
+  var start_time = new Date();
+  var custom_time = 1;
+
+  timeline.addCustomTime(custom_time, custom_time_id);
+
+  function animate() {
+    var current_time = new Date();
+    var diff_time = current_time - start_time;
+
+    if (diff_time > end_time) {
+      custom_time = 0;
+      start_time = current_time;
+
+    } else {
+      custom_time = diff_time;
+    }
+
+    timeline.setCustomTime(custom_time, custom_time_id);
+
+    requestAnimationFrame(animate);
+  }
+  animate();
 </script>
 
