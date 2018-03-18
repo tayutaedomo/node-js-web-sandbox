@@ -1,0 +1,47 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>
+  Refer: https://qiita.com/cocottejs/items/e75f751c7aa8a7361aab
+</p>
+
+<script type="text/javascript">
+  function inherits(sub, sup) {
+    sub.super_ = sup;
+    var F = function F () {};
+    F.prototype = sup.prototype;
+    sub.prototype = new F();
+    sub.prototype.constructor = sub;
+  }
+
+  function Super(value) {
+    this.prop = value;
+
+    console.log('hoge');
+  }
+
+  Super.prototype.method = function() {
+    console.log('Supoer.method');
+  };
+
+  function Sub(arg) {
+    Sub.super_.call(this, arg);
+
+    console.log('hogehoge');
+  }
+
+  inherits(Sub, Super);
+
+  Sub.prototype.method = function() {
+    Sub.super_.prototype.method.call(this);
+
+    console.log('Sub.method');
+  };
+
+
+  var inst = new Sub('foo');
+  console.log(inst.prop);
+  inst.method();
+</script>
+

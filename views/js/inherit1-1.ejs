@@ -1,0 +1,34 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>Refer: https://qiita.com/cocottejs/items/e75f751c7aa8a7361aab</p>
+
+<script type="text/javascript">
+  function Super(value) {
+    this.prop = value;
+
+    console.log('hoge');
+  }
+
+  Super.prototype.method = function() {
+    console.log('Supoer.method');
+  };
+
+  function Sub(name) {
+    Super.call(this, name);
+    this.prop = 'bar';
+
+    console.log('hogehoge');
+  }
+
+  Sub.prototype = new Super();
+  Sub.prototype.method = function() {
+    console.log('Sub.method');
+  };
+
+
+  var inst = new Sub('foo');
+  console.log(inst.prop);
+  inst.method();
+</script>

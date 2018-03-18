@@ -1,0 +1,51 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>
+  Refer: https://qiita.com/Koizumi-Greenwich/items/96215899b8b61cc85e65
+</p>
+
+<script type="text/javascript">
+  MyClass: {
+    MyClass = function(prop1, prop2) {
+      this.prop1 = prop1;
+      this.prop2 = prop2;
+    }
+    var p = MyClass.prototype;
+
+    p.methodA = function(arg1, arg2) {
+      return this.prop1 + this.prop2 + arg1 + arg2;
+    }
+
+    MyClass.staticProp1 = null;
+
+    MyClass.staticMethodA = function(arg3) {
+      return this.staticProp1 + arg3;
+    }
+  }
+
+  MySubClass: {
+    MySubClass = function(prop1, prop2, prop3) {
+      MyClass.call(this, prop1, prop2);
+
+      this.prop3 = prop3;
+    }
+
+    MySubClass.prototype = Object.create(MyClass.prototype, {value: {constructor: MySubClass}});
+
+    var p = MySubClass.prototype;
+
+    p.methodA = function(arg1, arg2, arg3) {
+      var parentResult = MyClass.prototype.methodA.call(this, arg1, arg2);
+      console.log('parentResult', parentResult);
+
+      return parentResult + this.prop3 + arg3;
+    }
+  }
+
+  var obj = new MySubClass('aaa', 'bbb', 'ccc');
+  var result1 = obj.methodA('ddd', 'eee', 'fff');
+  console.log('result1', result1);
+</script>
+

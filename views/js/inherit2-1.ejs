@@ -1,0 +1,73 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>Refer: https://qiita.com/no22@github/items/d3bead2acbb7ff1fb86b</p>
+
+<script type="text/javascript">
+  function inherits(ctor, superCtor) {
+    //ctor.super_ = superCtor;
+    ctor._super_ = superCtor.prototype;
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  }
+
+  function Parent(){}
+
+  //function Child(){}
+  function Child(arg){
+    //Parent.call(this, arg);
+    Child._super_.constructor.call(this, arg);
+  }
+
+  Child.prototype.methodName = function(arg) {
+    //Parent.prototype.methodName.call(this, arg);
+    Child._super_.methodName.call(this, arg);
+  };
+
+  inherits(Child, Parent);
+
+  var c = new Child();
+
+  function Super(value) {
+    this.prop = value;
+
+    console.log('hoge');
+  }
+
+  Super.prototype.method = function() {
+    console.log('Supoer.method');
+  };
+
+
+  function Sub(arg) {
+    //Sub.super_.call(this, arg);
+    Sub._super_.constructor.call(this, arg);
+
+    //this.prop = 'bar';
+
+    console.log('hogehoge');
+  }
+
+  Sub.prototype.method = function() {
+    //Sub.super_.prototype.method.call(this);
+    Sub._super_.method.call(this);
+
+    console.log('Sub.method');
+  };
+
+
+  inherits(Sub, Super);
+
+
+  var inst = new Sub('foo');
+  console.log(inst.prop);
+  inst.method();
+</script>
+
