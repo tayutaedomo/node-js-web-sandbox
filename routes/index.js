@@ -56,6 +56,10 @@ router.get('/timeline/:view', function(req, res, next) {
   res.render('timeline/' + req.params.view, { title: req.params.view + ' | Timeline' });
 });
 
+router.get('/ios/:view', function(req, res, next) {
+  res.render('ios/' + req.params.view, { title: req.params.view + ' | iOS Web' });
+});
+
 
 module.exports = router;
 

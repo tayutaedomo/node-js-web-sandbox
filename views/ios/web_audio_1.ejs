@@ -1,0 +1,55 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>
+  Refer: <a href="https://qiita.com/cocottejs/items/e75f751c7aa8a7361aab"></a>https://qiita.com/cocottejs/items/e75f751c7aa8a7361aab
+  <br>
+  正しく動作する例 (ページ読み込み時にHttpRequestを準備する場合)
+</p>
+
+<a id="Play" class="btn btn-success" href="javascript:void(0);">再生</a>
+<a id="Pause" class="btn btn-info" href="javascript:void(0);">停止</a>
+
+<script type="text/javascript">
+  var request, source, context;
+
+  window.onload = function () {
+    request = new XMLHttpRequest();
+    request.open("GET", "/sounds/amachamusic_emerald.mp3", true);
+    request.responseType = "arraybuffer";
+    request.onload = completeOnLoad;
+    request.send();
+  };
+
+  function completeOnLoad() {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    context = new AudioContext();
+    context.createBufferSource().start(0);
+
+    // オーディオをデコード
+    context.decodeAudioData(request.response, function (buf) {
+      source.buffer = buf;
+      source.loop = false;
+
+    });
+
+    source = context.createBufferSource();
+
+    var elem = document.getElementById("Play");
+    elem.addEventListener("click", playStart, false);
+
+    var elem = document.getElementById("Pause");
+    elem.addEventListener("click", playStop, false);
+  }
+
+  function playStart() {
+    source.connect(context.destination);
+    source.start(0);
+  }
+
+  function playStop() {
+    source.stop();
+  }
+</script>
+
