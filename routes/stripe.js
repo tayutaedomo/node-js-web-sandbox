@@ -90,6 +90,8 @@ router.post('/checkout_price', function(req, res) {
     debug(customer);
     payload.data.result_list.push(customer);
 
+    if (req.body.no_charge == 1) return {};
+
     return stripe.charges.create({
       amount: 2000,
       currency: "usd",

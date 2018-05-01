@@ -9,6 +9,12 @@
         <label>Email:</label>
         <input type="text" name="email" value="<%if (data.params.email) { %><%= data.params.email %><% } %>">
       </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="no_charge" value="1">
+          No Charge
+        </label>
+      </div>
 
       <script src="https://checkout.stripe.com/checkout.js"
               class="stripe-button"
@@ -17,7 +23,7 @@
               data-description="2 widgets"
               data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
               data-locale="auto"
-              data-zip-code="true">
+              data-zip-code="false">
       </script>
     </form>
   </div>
