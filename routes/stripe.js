@@ -187,6 +187,28 @@ router.post('/subscription', function(req, res) {
   });
 });
 
+router.get('/elements', function(req, res) {
+  res.render('stripe/elements', {
+    title : 'Stripe Elements',
+    data: { params: {} }
+  });
+});
+
+router.post('/elements', function(req, res) {
+  var payload = {
+    title : 'Stripe Elements',
+    data: {
+      params: {},
+      result_list: []
+    }
+  };
+
+  payload.data.params = req.body;
+  payload.data.result = JSON.stringify(req.body, null, 2);
+
+  res.render('stripe/elements', payload);
+});
+
 
 module.exports = router;
 
