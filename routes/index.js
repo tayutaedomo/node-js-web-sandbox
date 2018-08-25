@@ -60,6 +60,10 @@ router.get('/ios/:view', function(req, res, next) {
   res.render('ios/' + req.params.view, { title: req.params.view + ' | iOS Web' });
 });
 
+router.get('/hlsjs/:view', function(req, res, next) {
+  res.render('hlsjs/' + req.params.view, { title: req.params.view + ' | hls.js' });
+});
+
 
 module.exports = router;
 

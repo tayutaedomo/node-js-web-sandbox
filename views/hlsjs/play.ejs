@@ -1,0 +1,33 @@
+<% layout('layout') %>
+
+<script src="//cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<div>
+  Refer: <a href="https://video-dev.github.io/hls.js/demo/" target="_blank">https://video-dev.github.io/hls.js/demo/</a>
+</div>
+
+<div>
+  <button onclick="play()">Play</button>
+  <button onclick="pause()">Pause</button>
+</div>
+
+<video id="video" width=600 height=300 controls></video>
+
+<script>
+  var video = document.getElementById('video');
+
+  var hls = new Hls();
+  hls.loadSource('//video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8');
+  hls.attachMedia(video);
+  hls.on(Hls.Events.MANIFEST_PARSED,function() {
+    video.play();
+  });
+
+  function play() {
+    video.play();
+  }
+  function pause() {
+    video.pause();
+  }
+</script>
+
