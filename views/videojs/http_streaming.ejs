@@ -1,0 +1,20 @@
+<% layout('layout') %>
+
+<link href="//vjs.zencdn.net/7.0/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/7.0/video.min.js"></script>
+<script src="//unpkg.com/@videojs/http-streaming@1.2.5/dist/videojs-http-streaming.min.js"></script>
+
+<p>
+  Refer: <a href="https://github.com/videojs/http-streaming" target="_blank">https://github.com/videojs/http-streaming</a>
+</p>
+
+<video-js id="vid1" width=600 height=300 class="vjs-default-skin" controls>
+  <source src="//video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8"
+          type="application/x-mpegURL">
+</video-js>
+
+<script>
+  var player = videojs('vid1');
+  player.play();
+</script>
+
