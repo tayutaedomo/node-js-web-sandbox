@@ -23,6 +23,11 @@
 
 <div class="row">
   <div class="col-sm-12">
+    <div>
+      <button onclick="play()">Play</button>
+      <button onclick="pause()">Pause</button>
+    </div>
+
     <video id=example-video width=600 height=300 class="video-js vjs-default-skin" controlsi loop>
       <source src="//video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8"
               type="application/x-mpegURL">
@@ -41,6 +46,13 @@
 
       var player = videojs('example-video');
       player.play();
+
+      function play() {
+        player.play();
+      }
+      function pause() {
+        player.pause();
+      }
     </script>
   </div>
 </div>
