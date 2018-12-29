@@ -39,7 +39,12 @@ router.post('/multer_xhr', upload_local.fields([ { name: 'file' } ]), function(r
   console.log('files', req.files);
   console.log('body', req.body);
 
-  res.send('OK');
+  const payload = {
+    files: req.files,
+    body: req.body
+  };
+
+  res.send(util.inspect(payload, { depth: 10 }));
 });
 
 
