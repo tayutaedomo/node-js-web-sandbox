@@ -35,6 +35,13 @@ router.post('/multer_memory', upload_memoney.fields([ { name: 'file' } ]), funct
   res.render('file_upload/multer_memory', payload);
 });
 
+router.post('/multer_xhr', upload_local.fields([ { name: 'file' } ]), function(req, res) {
+  console.log('files', req.files);
+  console.log('body', req.body);
+
+  res.send('OK');
+});
+
 
 router.post('/multiparty', function(req, res) {
   const payload =  {
