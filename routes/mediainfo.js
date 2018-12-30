@@ -11,7 +11,7 @@ const parse = require('mediainfo-parser').parse;
 
 router.post('/file_upload', upload_local.fields([ { name: 'file' } ]), function(req, res) {
   const payload =  {
-    title : 'Local Store | mediainfo',
+    title : 'File Uploaded | mediainfo',
     data: {
       files: req.files
     }
