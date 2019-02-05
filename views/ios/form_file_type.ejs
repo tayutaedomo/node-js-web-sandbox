@@ -1,0 +1,27 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>
+  Refer: <a href="https://stackoverflow.com/questions/25287112/record-voice-from-iphone-using-html5">https://stackoverflow.com/questions/25287112/record-voice-from-iphone-using-html5</a>
+</p>
+
+<div>
+  <form>
+    <div>
+      <label>image/*</label>
+      <input type="file" accept="image/*" capture="camera">
+    </div>
+
+    <div>
+      <label>video/*</label>
+      <input type="file" accept="video/*" capture="camcorder">
+    </div>
+
+    <div>
+      <label>audio/*</label>
+      <input type="file" accept="audio/*" capture="microphone">
+    </div>
+  </form>
+</div>
+
