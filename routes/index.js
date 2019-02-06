@@ -64,6 +64,13 @@ router.get('/hlsjs/:view', function(req, res, next) {
   res.render('hlsjs/' + req.params.view, { title: req.params.view + ' | hls.js' });
 });
 
+router.get('/qrcode/:view', function(req, res, next) {
+  res.render('qrcode/' + req.params.view, { title: req.params.view + ' | QR Code' });
+});
+
+
+
+
 
 module.exports = router;
 
