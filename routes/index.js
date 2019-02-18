@@ -23,6 +23,7 @@ var VIDEOJS_TITLES = {
   design_resizing: 'Design: Resizing',
   events: 'Events'
 };
+
 router.get('/videojs/:view', function(req, res) {
   var title = VIDEOJS_TITLES[req.params.view] ? VIDEOJS_TITLES[req.params.view] : req.params.view;
   res.render('videojs/' + req.params.view, { title : title });
@@ -66,6 +67,37 @@ router.get('/hlsjs/:view', function(req, res, next) {
 
 router.get('/qrcode/:view', function(req, res, next) {
   res.render('qrcode/' + req.params.view, { title: req.params.view + ' | QR Code' });
+});
+
+
+
+router.get('/manifest.json', function(req, res) {
+  res.send(
+    {
+      "short_name": "TayuWebSdx",
+      "name": "Tayutaedomo Web Sandbox",
+      "icons": [
+        {
+          "src": "/images/icon/app_48x48.png",
+          "type": "image/png",
+          "sizes": "48x48"
+        }
+        // {
+        //   "src": "launcher-icon-2x.png",
+        //   "type": "image/png",
+        //   "sizes": "96x96"
+        // },
+        // {
+        //   "src": "launcher-icon-4x.png",
+        //   "type": "image/png",
+        //   "sizes": "192x192"
+        // }
+      ],
+      "start_url": "/?manifest=1",
+      "display": "browser"
+      //"display": "standalone"
+      //"orientation": "landscape"
+    });
 });
 
 
