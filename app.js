@@ -12,6 +12,7 @@ const cache_routes = require('./routes/cache');
 const stripe_routes = require('./routes/stripe');
 const file_upload_routes = require('./routes/file_upload');
 const mediainfo_routes = require('./routes/mediainfo');
+const pdf_routes = require('./routes/pdf');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/cache', cache_routes);
 app.use('/stripe', stripe_routes);
 app.use('/file_upload', file_upload_routes);
 app.use('/mediainfo', mediainfo_routes);
+app.use('/pdf', pdf_routes);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
