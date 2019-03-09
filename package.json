@@ -22,7 +22,7 @@
     "ioredis": "^3.1.4",
     "js-beautify": "^1.8.9",
     "mediainfo-parser": "^1.1.5",
-    "memjs": "^1.0.0-rc.1",
+    "memjs": "^1.2.0",
     "moment-timezone": "^0.5.17",
     "morgan": "~1.7.0",
     "multer": "^1.4.1",
