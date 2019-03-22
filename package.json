@@ -20,6 +20,7 @@
     "ejs-mate": "^2.3.0",
     "express": "~4.13.4",
     "ioredis": "^3.1.4",
+    "jimp": "^0.6.0",
     "js-beautify": "^1.8.9",
     "mediainfo-parser": "^1.1.5",
     "memjs": "^1.2.0",
