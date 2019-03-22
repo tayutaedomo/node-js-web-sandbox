@@ -1,0 +1,38 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form method="post" enctype="multipart/form-data" action="/jimp/resize">
+      <!--<div class="form-group">-->
+        <!--<label>Text</label>-->
+        <!--<input type="text" name="text" value="TEXT">-->
+      <!--</div>-->
+
+      <div class="form-group">
+        <label>File</label>
+        <input type="file" name="file">
+      </div>
+
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+
+<% if (data.image_src) { %>
+<div class="row m-t-md">
+  <div class="col-sm-12">
+    <img src="<%= data.image_src %>">
+  </div>
+</div>
+<% } %>
+
+<% if (data.result) { %>
+<div class="row m-t-md">
+  <div class="col-sm-12">
+      <pre class="bg-info"><code><%= beautify(JSON.stringify(data.result), { indent_size: 2 }) %></code></pre>
+  </div>
+</div>
+<% } %>
+
