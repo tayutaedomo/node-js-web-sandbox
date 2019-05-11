@@ -1,0 +1,15 @@
+<% layout('layout') %>
+
+
+<h1><%= title %></h1>
+
+
+<script type="text/javascript" src="/javascripts/loading/first.js" async></script>
+<script type="text/javascript" src="/javascripts/loading/second.js" async></script>
+
+<script type="text/javascript" async>
+  console.log('main', LOADING_FIRST, LOADING_SECOND);
+  loading_func_1st('main');
+  loading_func_2nd('main');
+</script>
+
