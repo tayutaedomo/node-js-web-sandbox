@@ -210,5 +210,28 @@ router.post('/elements', function(req, res) {
 });
 
 
+router.get('/v3_checkout_client', function(req, res) {
+  res.render('stripe/v3_checkout_client', {
+    title : 'Stripe v3 Checkout Client',
+    data: { req: req, res: res }
+  });
+});
+
+router.get('/v3_checkout_client/success', function(req, res) {
+  res.render('stripe/v3_checkout_client', {
+    title : 'Stripe v3 Checkout Client Success',
+    data: { req: req, res: res }
+  });
+});
+
+router.get('/v3_checkout_client/cancel', function(req, res) {
+  res.render('stripe/v3_checkout_client', {
+    title : 'Stripe v3 Checkout Client Cancel',
+    data: { req: req, res: res }
+  });
+});
+
+
+
 module.exports = router;
 

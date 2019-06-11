@@ -1,0 +1,77 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<h3>Docs</h3>
+
+<div class="row">
+  <div class="col-sm-12">
+    <ul>
+      <li>
+        <a href="https://stripe.com/docs/payments/checkout/client" target="_blank">https://stripe.com/docs/payments/checkout/client</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Load Stripe.js on your website. -->
+<script src="https://js.stripe.com/v3"></script>
+
+<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
+<div class="row">
+  <div class="col-sm-6">
+    <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+        id="checkout-button-sku_FEZhXJGCxNRNeh"
+        role="link">
+      Checkout
+    </button>
+
+    <div id="error-message"></div>
+  </div>
+</div>
+
+<script>
+  var stripe = Stripe('pk_test_7fvh7dT8TfcKxZa2USG3zEOy');
+
+  var checkoutButton = document.getElementById('checkout-button-sku_FEZhXJGCxNRNeh');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      items: [{sku: 'sku_FEZhXJGCxNRNeh', quantity: 1}],
+
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: 'http://localhost:3002/stripe/v3_checkout_client/success',
+      cancelUrl: 'http://localhost:3002/stripe/v3_checkout_client/cancel',
+    })
+      .then(function (result) {
+        if (result.error) {
+          // If `redirectToCheckout` fails due to a browser or network
+          // error, display the localized error message to your customer.
+          var displayError = document.getElementById('error-message');
+          displayError.textContent = result.error.message;
+        }
+      });
+  });
+</script>
+
+
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-12">
+    <% if (data.error) { %>
+      <label>API call Failed</label>
+      <pre class="bg-danger"><code><%= data.error %></code></pre>
+    <% } %>
+
+    <% if (data.result) { %>
+      <label>API call succeeded</label>
+      <pre class="bg-success"><code><%= data.result %></code></pre>
+    <% } %>
+  </div>
+</div>
+
