@@ -210,5 +210,81 @@ router.post('/elements', function(req, res) {
 });
 
 
+router.get('/v3_checkout_client', function(req, res) {
+  res.render('stripe/v3_checkout_client', {
+    title : 'Stripe v3 Checkout Client',
+    data: { req: req, res: res }
+  });
+});
+
+router.get('/v3_checkout_client/success', function(req, res) {
+  res.render('stripe/v3_checkout_client', {
+    title : 'Stripe v3 Checkout Client Success',
+    data: { req: req, res: res }
+  });
+});
+
+router.get('/v3_checkout_client/cancel', function(req, res) {
+  res.render('stripe/v3_checkout_client', {
+    title : 'Stripe v3 Checkout Client Cancel',
+    data: { req: req, res: res }
+  });
+});
+
+router.get('/v3_checkout_server', (req, res) => {
+  let base_url = `${req.protocol}://`;
+  base_url += req.hostname == 'localhost' ? 'localhost:3002' : req.hostname;
+  const success_url = `${base_url}/stripe/v3_checkout_server/success`;
+  const cancel_url  = `${base_url}/stripe/v3_checkout_server/cancel`;
+
+  const payload = {
+    title : 'Stripe v3 Checkout Server',
+    data: { req: req, res: res }
+  };
+
+  stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [{
+      name: 'T-shirt',
+      description: 'Comfortable cotton t-shirt',
+      images: ['https://tayutaedomo-web.herokuapp.com/images/shutterstock_125750330.jpg'],
+      amount: 1000,
+      currency: 'usd',
+      quantity: 1,
+    }],
+    success_url: success_url,
+    cancel_url: cancel_url,
+  }, (err, session) => {
+    if (err) {
+      console.error(err.stack || err);
+
+      payload.data.error = err;
+
+    } else {
+      payload.data.session = session;
+    }
+
+    debug('v3_checkout_server payload', payload);
+
+    res.render('stripe/v3_checkout_server', payload);
+  });
+});
+
+router.get('/v3_checkout_server/success', (req, res) => {
+  res.render('stripe/v3_checkout_server', {
+    title : 'Stripe v3 Checkout Server Success',
+    data: { req: req, res: res }
+  });
+});
+
+router.get('/v3_checkout_server/cancel', (req, res) => {
+  res.render('stripe/v3_checkout_server', {
+    title : 'Stripe v3 Checkout Server Cancel',
+    data: { req: req, res: res }
+  });
+});
+
+
+
 module.exports = router;
 

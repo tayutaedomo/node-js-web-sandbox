@@ -1,0 +1,66 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<h3>Docs</h3>
+
+<div class="row">
+  <div class="col-sm-12">
+    <ul>
+      <li>
+        <a href="https://stripe.com/docs/payments/checkout/server" target="_blank">https://stripe.com/docs/payments/checkout/server</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<% if (data.session) { %>
+<div class="row">
+  <div class="col-sm-6">
+    <button style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+            role="link" onclick="click_checkout()">
+      Checkout
+    </button>
+
+    <div id="error-message"></div>
+  </div>
+</div>
+<% } %>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script type="text/javascript">
+  var stripe = Stripe('pk_test_7fvh7dT8TfcKxZa2USG3zEOy');
+
+  function click_checkout() {
+    stripe.redirectToCheckout({
+      // Make the id field from the Checkout Session creation API response
+      // available to this file, so you can provide it as parameter here
+      // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+      sessionId: '<% if (data.session) { %><%= data.session.id %><% } %>'
+    }).then(function (result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+
+      console.error(result);
+    });
+  }
+</script>
+
+
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-12">
+    <% if (data.error) { %>
+      <label>API call Failed</label>
+      <pre class="bg-danger"><code><%= data.error %></code></pre>
+    <% } %>
+
+    <% if (data.result) { %>
+      <label>API call succeeded</label>
+      <pre class="bg-success"><code><%= data.result %></code></pre>
+    <% } %>
+  </div>
+</div>
+
