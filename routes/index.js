@@ -69,6 +69,10 @@ router.get('/qrcode/:view', function(req, res, next) {
   res.render('qrcode/' + req.params.view, { title: req.params.view + ' | QR Code' });
 });
 
+router.get('/scheme/:view', function(req, res, next) {
+  res.render('scheme/' + req.params.view, { title: req.params.view + ' | URL Scheme' });
+});
+
 
 
 router.get('/manifest.json', function(req, res) {
