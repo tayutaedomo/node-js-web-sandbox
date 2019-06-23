@@ -1,3 +1,6 @@
+
+require('sqreen');
+
 const express = require('express');
 const engine = require('ejs-mate');
 const path = require('path');
