@@ -5,6 +5,25 @@
 
 <div class="row">
   <div class="col-sm-12">
+    <ul>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event</a>
+      </li>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement</a>
+      </li>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement</a>
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/questions/8885701/play-local-hard-drive-video-file-with-html5-video-tag" target="_blank">https://stackoverflow.com/questions/8885701/play-local-hard-drive-video-file-with-html5-video-tag</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
     <form>
       <div class="form-group">
         <label>File</label>
@@ -30,11 +49,12 @@
 
     video.addEventListener('loadedmetadata', function(event) {
       console.log(event);
+      console.log(video.mediaGroup);
 
       var payload = {
         videoHeight: video.videoHeight,
         videoWidth: video.videoWidth,
-        duration: video.duration
+        duration: video.duration,
       };
 
       output.innerHTML = JSON.stringify(payload, null, 2);
