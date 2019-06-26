@@ -73,6 +73,10 @@ router.get('/scheme/:view', function(req, res, next) {
   res.render('scheme/' + req.params.view, { title: req.params.view + ' | URL Scheme' });
 });
 
+router.get('/html_video/:view', function(req, res, next) {
+  res.render('html_video/' + req.params.view, { title: req.params.view + ' | HTMLVideoElement' });
+});
+
 
 
 router.get('/manifest.json', function(req, res) {

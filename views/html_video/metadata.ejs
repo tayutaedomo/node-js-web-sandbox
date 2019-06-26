@@ -1,0 +1,67 @@
+<% layout('layout') %>
+
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <ul>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event</a>
+      </li>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement</a>
+      </li>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement</a>
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/questions/8885701/play-local-hard-drive-video-file-with-html5-video-tag" target="_blank">https://stackoverflow.com/questions/8885701/play-local-hard-drive-video-file-with-html5-video-tag</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form>
+      <div class="form-group">
+        <label>File</label>
+        <input type="file" id="file" onchange="on_file_change(this.files)">
+      </div>
+
+      <pre class="bg-info"><code id="output"></code></pre>
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function on_file_change(files) {
+    console.log(files);
+
+    var file = files[0];
+    var output = document.querySelector('#output');
+
+    // output.innerHTML = JSON.stringify(file, null, 2);
+
+    var video = document.createElement('video');
+
+    video.addEventListener('loadedmetadata', function(event) {
+      console.log(event);
+      console.log(video.mediaGroup);
+
+      var payload = {
+        videoHeight: video.videoHeight,
+        videoWidth: video.videoWidth,
+        duration: video.duration,
+      };
+
+      output.innerHTML = JSON.stringify(payload, null, 2);
+    });
+
+    var fileURL = URL.createObjectURL(file);
+    video.src = fileURL;
+  }
+</script>
+
