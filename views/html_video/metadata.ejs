@@ -1,0 +1,47 @@
+<% layout('layout') %>
+
+
+<h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form>
+      <div class="form-group">
+        <label>File</label>
+        <input type="file" id="file" onchange="on_file_change(this.files)">
+      </div>
+
+      <pre class="bg-info"><code id="output"></code></pre>
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function on_file_change(files) {
+    console.log(files);
+
+    var file = files[0];
+    var output = document.querySelector('#output');
+
+    // output.innerHTML = JSON.stringify(file, null, 2);
+
+    var video = document.createElement('video');
+
+    video.addEventListener('loadedmetadata', function(event) {
+      console.log(event);
+
+      var payload = {
+        videoHeight: video.videoHeight,
+        videoWidth: video.videoWidth,
+        duration: video.duration
+      };
+
+      output.innerHTML = JSON.stringify(payload, null, 2);
+    });
+
+    var fileURL = URL.createObjectURL(file);
+    video.src = fileURL;
+  }
+</script>
+
