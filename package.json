@@ -4,8 +4,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "6.x",
-    "npm": "3.x"
+    "node": "8.x",
+    "npm": "5.x"
   },
   "scripts": {
     "postinstall": "bower install",
