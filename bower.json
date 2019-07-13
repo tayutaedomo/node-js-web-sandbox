@@ -1,12 +1,12 @@
 {
-  "name": "videojs-trial",
+  "name": "node-js-web-sandbox",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "video-js": "5.9.2"
   },
   "devDependencies": {
+    "video-js": "5.9.2",
     "PreloadJS": "^0.6.2"
   }
 }
