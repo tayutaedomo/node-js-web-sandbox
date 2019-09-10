@@ -285,6 +285,16 @@ router.get('/v3_checkout_server/cancel', (req, res) => {
 });
 
 
+router.get('/intents', (req, res) => {
+  const local = {
+    title : 'Payment Intents',
+    data: { req: req, res: res }
+  };
+
+  res.render('stripe/intents', local);
+});
+
+
 
 module.exports = router;
 
