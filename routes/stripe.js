@@ -1,8 +1,8 @@
-var debug = require('debug')('node-js-web-sandbox:routes:stripe');
-var express = require('express');
-var router = express.Router();
+const debug = require('debug')('node-js-web-sandbox:routes:stripe');
+const express = require('express');
+const router = express.Router();
 
-var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 router.get('/checkout', function(req, res) {
@@ -294,6 +294,65 @@ router.get('/intents', (req, res) => {
   res.render('stripe/intents', local);
 });
 
+router.post('/intents/api/confirm_payment', async (req, res) => {
+  debug('confirm_payment:req.body', req.body);
+
+  try {
+    let intent;
+    if (req.body.payment_method_id) {
+      // Create the PaymentIntent
+      intent = await stripe.paymentIntents.create({
+        payment_method: req.body.payment_method_id,
+        amount: 1099,
+        currency: 'jpy',
+        confirmation_method: 'manual',
+        confirm: true
+      });
+
+    } else if (req.body.payment_intent_id) {
+      intent = await stripe.paymentIntents.confirm(
+        req.body.payment_intent_id
+      );
+    }
+
+    debug('confirm_payment:intent', intent);
+
+    // Send the response to the client
+    res.send(generate_payment_response(intent));
+
+  } catch (e) {
+    debug('confirm_payment:err', e);
+
+    // Display error on client
+    return res.send({ error: e.message });
+  }
+});
+
+const generate_payment_response = (intent) => {
+  // Note that if your API version is before 2019-02-11, 'requires_action'
+  // appears as 'requires_source_action'.
+  if (
+    (intent.status === 'requires_action' || intent.status === 'requires_source_action') &&
+    intent.next_action.type === 'use_stripe_sdk'
+  ) {
+    // Tell the client to handle the action
+    return {
+      requires_action: true,
+      payment_intent_client_secret: intent.client_secret
+    };
+  } else if (intent.status === 'succeeded') {
+    // The payment didn’t need any additional actions and completed!
+    // Handle post-payment fulfillment
+    return {
+      success: true
+    };
+  } else {
+    // Invalid status
+    return {
+      error: 'Invalid PaymentIntent status'
+    }
+  }
+};
 
 
 module.exports = router;

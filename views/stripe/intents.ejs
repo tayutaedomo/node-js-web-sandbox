@@ -5,7 +5,7 @@
 
 <% block('body_javascript_tags').append('<script src="/javascripts/stripe/intents_app.js"></script>') %>
 
-<div ng-app="app" ng-controller="StripeIntentsController as app_ctrl">
+<div ng-app="app" ng-controller="StripeIntentsController as root_ctrl">
 
   <h1><%= title %></h1>
 
@@ -14,7 +14,7 @@
       <form action="javascript:void(0);">
         <div class="form-group">
           <label>CardHolder Nmae:</label>
-          <input id="cardholder-name" type="text">
+          <input id="cardholder-name" type="text" ng-model="cardholder_name">
         </div>
 
         <div class="form-row form-group">
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-          <button id="card-button">Submit Payment</button>
+          <button ng-click="on_click($event)">Submit Payment</button>
         </div>
       </form>
     </div>
@@ -44,47 +44,4 @@
   </div>
 
 </div>
-
-
-<script type="text/javascript">
-
-  var stripe = Stripe('pk_test_7fvh7dT8TfcKxZa2USG3zEOy');
-
-  var elements = stripe.elements();
-  var cardElement = elements.create('card');
-  cardElement.mount('#card-element');
-
-
-  var cardholderName = document.getElementById('cardholder-name');
-  var cardButton = document.getElementById('card-button');
-
-  cardButton.addEventListener('click', function(ev) {
-    stripe.createPaymentMethod('card', cardElement, {
-      billing_details: {name: cardholderName.value}
-    }).then(function(result) {
-      console.log('createPaymentMethod:result', result);
-
-      if (result.error) {
-        // Show error in payment form
-        console.error(result.error);
-
-      } else {
-        // TODO
-        // Otherwise send paymentMethod.id to your server (see Step 2)
-        fetch('/ajax/confirm_payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ payment_method_id: result.paymentMethod.id })
-        }).then(function(result) {
-          // TODO
-          // Handle server response (see Step 3)
-          result.json().then(function(json) {
-            handleServerResponse(json);
-          })
-        });
-      }
-    });
-  });
-
-</script>
 
