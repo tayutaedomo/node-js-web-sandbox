@@ -1,41 +1,48 @@
 <% layout('layout') %>
 
 <% block('additional_javascript_tags').append('<script src="https://js.stripe.com/v3/"></script>') %>
+<% block('additional_javascript_tags').append('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>') %>
 
-<h1><%= title %></h1>
+<% block('body_javascript_tags').append('<script src="/javascripts/stripe/intents_app.js"></script>') %>
 
-<div class="row">
-  <div class="col-sm-6">
-    <form action="javascript:void(0);">
-      <div class="form-group">
-        <label>CardHolder Nmae:</label>
-        <input id="cardholder-name" type="text">
-      </div>
+<div ng-app="app" ng-controller="StripeIntentsController as app_ctrl">
 
-      <div class="form-row form-group">
-        <!-- placeholder for Elements -->
-        <div id="card-element"></div>
-      </div>
+  <h1><%= title %></h1>
 
-      <div class="form-group">
-        <button id="card-button">Submit Payment</button>
-      </div>
-    </form>
+  <div class="row">
+    <div class="col-sm-6">
+      <form action="javascript:void(0);">
+        <div class="form-group">
+          <label>CardHolder Nmae:</label>
+          <input id="cardholder-name" type="text">
+        </div>
+
+        <div class="form-row form-group">
+          <!-- placeholder for Elements -->
+          <div id="card-element"></div>
+        </div>
+
+        <div class="form-group">
+          <button id="card-button">Submit Payment</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
-<div class="row" style="margin-top: 20px;">
-  <div class="col-sm-12">
-    <% if (data.error) { %>
-      <label>API call Failed</label>
-      <pre class="bg-danger"><code><%= data.error %></code></pre>
-    <% } %>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-sm-12">
+      <% if (data.error) { %>
+        <label>API call Failed</label>
+        <pre class="bg-danger"><code><%= data.error %></code></pre>
+      <% } %>
 
-    <% if (data.result) { %>
-      <label>API call succeeded</label>
-      <pre class="bg-success"><code><%= data.result %></code></pre>
-    <% } %>
+      <% if (data.result) { %>
+        <label>API call succeeded</label>
+        <pre class="bg-success"><code><%= data.result %></code></pre>
+      <% } %>
+    </div>
   </div>
+
 </div>
 
 
