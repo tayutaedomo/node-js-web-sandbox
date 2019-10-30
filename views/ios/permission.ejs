@@ -1,0 +1,51 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<p>
+  Refer: <a href="https://medium.com/flawless-app-stories/how-to-request-device-motion-and-orientation-permission-in-ios-13-74fc9d6cd140">https://medium.com/flawless-app-stories/how-to-request-device-motion-and-orientation-permission-in-ios-13-74fc9d6cd140</a>
+  <br>
+  Refer: <a href="https://qiita.com/nakakaz11/items/a9be602874bd54819a18">https://qiita.com/nakakaz11/items/a9be602874bd54819a18</a>
+</p>
+
+<div>
+  <form>
+    <div>
+      <button type="button" onclick="on_permission_click()">Request Permission</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  function request_permissions() {
+    DeviceMotionEvent.requestPermission().then(response => {
+      console.log('DeviceMotionEvent.requestPermission:response', response);
+
+      if (response == 'granted') {
+        // window.addEventListener('devicemotion', (e) => {
+        //   // do something with e
+        // });
+      }
+    }).catch(console.error);
+
+    DeviceOrientationEvent.requestPermission().then(response => {
+      console.log('DeviceOrientationEvent.requestPermission:response', response);
+
+      if (response == 'granted') {
+        // window.addEventListener('deviceorientation', (e) => {
+        //   // do something with e
+        // });
+      }
+    }).catch(console.error)
+  }
+  request_permissions(); // No click
+
+
+  function on_permission_click() {
+    console.log('clicked');
+    request_permissions();
+  }
+
+</script>
+
