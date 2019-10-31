@@ -1,0 +1,60 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div>
+  <form>
+    <div>
+      <button type="button" onclick="on_permission_click()">Request Permission</button>
+    </div>
+
+    <div>
+      <label>alpha</label>
+      <input id="alpha" type="text">
+    </div>
+
+    <div>
+      <label>beta</label>
+      <input id="beta" type="text">
+    </div>
+
+    <div>
+      <label>gamma</label>
+      <input id="gamma" type="text">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  var alpha = 0;
+  var beta = 0;
+  var gamma = 0;
+  var alpha_elem = document.querySelector('#alpha');
+  var beta_elem = document.querySelector('#beta');
+  var gamma_elem = document.querySelector('#gamma');
+
+  function animate() {
+    alpha_elem.value = alpha;
+    beta_elem.value = beta;
+    gamma_elem.value = gamma;
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  window.addEventListener('deviceorientation', (e) => {
+    console.log('deviceorientation', e);
+    alpha = e.alpha;
+    beta = e.beta;
+    gamma = e.gamma;
+  });
+
+  function on_permission_click() {
+    DeviceOrientationEvent.requestPermission().then(response => {
+      console.log('DeviceOrientationEvent.requestPermission:response', response);
+    }).catch(console.error)
+  }
+
+</script>
+
