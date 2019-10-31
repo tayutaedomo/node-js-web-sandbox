@@ -62,6 +62,9 @@
       if (response == 'granted') {
         window.addEventListener('deviceorientation', (e) => {
           console.log('deviceorientation', e);
+          alpha = e.alpha;
+          beta = e.beta;
+          gamma = e.gamma;
         });
       }
     }).catch(console.error)
