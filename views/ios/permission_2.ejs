@@ -1,0 +1,76 @@
+<% layout('layout') %>
+
+<h1><%= title %></h1>
+
+<div>
+  <form>
+    <div>
+      <button type="button" onclick="on_permission_click()">Request Permission</button>
+    </div>
+
+    <div>
+      <label>alpha</label>
+      <input id="alpha" type="text">
+    </div>
+
+    <div>
+      <label>beta</label>
+      <input id="beta" type="text">
+    </div>
+
+    <div>
+      <label>gamma</label>
+      <input id="gamma" type="text">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  var alpha = 0;
+  var beta = 0;
+  var gamma = 0;
+  var alpha_elem = document.querySelector('#alpha');
+  var beta_elem = document.querySelector('#beta');
+  var gamma_elem = document.querySelector('#gamma');
+
+  function animate() {
+    //console.log('alpha, beta, gamma', alpha, beta, gamma);
+    alpha_elem.value = alpha;
+    beta_elem.value = beta;
+    gamma_elem.value = gamma;
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+
+  function request_permissions() {
+    DeviceMotionEvent.requestPermission().then(response => {
+      console.log('DeviceMotionEvent.requestPermission:response', response);
+
+      if (response == 'granted') {
+        window.addEventListener('devicemotion', (e) => {
+          console.log('devicemotion', e);
+        });
+      }
+    }).catch(console.error);
+
+    DeviceOrientationEvent.requestPermission().then(response => {
+      console.log('DeviceOrientationEvent.requestPermission:response', response);
+
+      if (response == 'granted') {
+        window.addEventListener('deviceorientation', (e) => {
+          console.log('deviceorientation', e);
+        });
+      }
+    }).catch(console.error)
+  }
+
+  function on_permission_click() {
+    console.log('clicked');
+    request_permissions();
+  }
+
+</script>
+
