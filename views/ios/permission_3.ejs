@@ -35,7 +35,6 @@
   var gamma_elem = document.querySelector('#gamma');
 
   function animate() {
-    //console.log('alpha, beta, gamma', alpha, beta, gamma);
     alpha_elem.value = alpha;
     beta_elem.value = beta;
     gamma_elem.value = gamma;
@@ -44,35 +43,17 @@
   }
   animate();
 
-
-  function request_permissions() {
-    DeviceMotionEvent.requestPermission().then(response => {
-      console.log('DeviceMotionEvent.requestPermission:response', response);
-
-      if (response == 'granted') {
-        window.addEventListener('devicemotion', (e) => {
-          console.log('devicemotion', e);
-        });
-      }
-    }).catch(console.error);
-
-    DeviceOrientationEvent.requestPermission().then(response => {
-      console.log('DeviceOrientationEvent.requestPermission:response', response);
-
-      if (response == 'granted') {
-        window.addEventListener('deviceorientation', (e) => {
-          console.log('deviceorientation', e);
-          alpha = e.alpha;
-          beta = e.beta;
-          gamma = e.gamma;
-        });
-      }
-    }).catch(console.error)
-  }
+  window.addEventListener('deviceorientation', (e) => {
+    console.log('deviceorientation', e);
+    alpha = e.alpha;
+    beta = e.beta;
+    gamma = e.gamma;
+  });
 
   function on_permission_click() {
-    console.log('clicked');
-    request_permissions();
+    DeviceOrientationEvent.requestPermission().then(response => {
+      console.log('DeviceOrientationEvent.requestPermission:response', response);
+    }).catch(console.error)
   }
 
 </script>
