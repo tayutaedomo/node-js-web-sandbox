@@ -17,6 +17,7 @@ const mediainfo_routes = require('./routes/mediainfo');
 const pdf_routes = require('./routes/pdf');
 const jimp_routes = require('./routes/jimp');
 const crypto_routes = require('./routes/crypto');
+const graphql_routes = require('./routes/graphql');
 
 const app = express();
 
@@ -43,6 +44,8 @@ app.use('/mediainfo', mediainfo_routes);
 app.use('/pdf', pdf_routes);
 app.use('/jimp', jimp_routes);
 app.use('/crypto', crypto_routes);
+app.use('/graphql', graphql_routes);
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
