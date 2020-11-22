@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "8.x"
+    "node": "10.x"
   },
   "scripts": {
     "postinstall": "bower install -p",
@@ -19,6 +19,8 @@
     "ejs": "~2.4.1",
     "ejs-mate": "^2.3.0",
     "express": "~4.13.4",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.4.2",
     "ioredis": "^3.1.4",
     "jimp": "^0.6.0",
     "js-beautify": "^1.8.9",
