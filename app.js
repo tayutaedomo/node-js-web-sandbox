@@ -1,5 +1,4 @@
-
-require('sqreen');
+//require('sqreen');
 
 const express = require('express');
 const engine = require('ejs-mate');
