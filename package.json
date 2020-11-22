@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "8.x"
+    "node": "10.x"
   },
   "scripts": {
     "postinstall": "bower install -p",
